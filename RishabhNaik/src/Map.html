@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Marker Map</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script>
+            //your access token which you get from mapbox api goes here
+            L.mapbox.accessToken
+              "Your accessToken goes here";
+
+
+            //copy rights and attribution
+            var mapboxTiles = L.tileLayer(
+              "https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=" +
+                L.mapbox.accessToken,
+              {
+                attribution:
+                  '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                tileSize: 512,
+                zoomOffset: -1
+              }
+            );
+
+            // A Map is created
+            var map = L.map("map")
+              .addLayer(mapboxTiles)
+              .setView([42.361, -71.0587], 15);
+
+            //empty Marker set
+            var theMarker = {};
+
+            // Click on map places a Marker and fills theMarker set
+            map.on('click',function(e){
+              lat = e.latlng.lat;
+              lon = e.latlng.lng;
+
+              //  Console output of the location or geographic points
+              console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
+
+              //Clear existing marker,
+              if (theMarker != undefined) {
+                    map.removeLayer(theMarker);
+              };
+
+          //Add a marker to show where you clicked a small window over the map.
+          theMarker = L.marker([lat,lon]).addTo(map).bindPopup("<h1>Hello,you clicked here</h1>")
+      });
+    </script>
+  </body>
+</html>
