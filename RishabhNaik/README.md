@@ -1,4 +1,4 @@
-The is a simple code that is used to place a marker on map when one clicks on the Map.
+This is a simple code that is used to place a marker on map when one clicks on the Map.
 
 How to make it work?
 
